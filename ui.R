@@ -14,8 +14,7 @@ shinyUI(bootstrapPage(
       uiOutput("uiLogin"),
       textOutput("pass")
   ), 
-  div(class = "span4", uiOutput("MainUI")),
-  div(class = "span8", plotOutput("distPlot"))
+  div(class = "span4", uiOutput("MainUI"))
   
 
 ))
