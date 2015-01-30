@@ -1,0 +1,8 @@
+.Rproj.user
+.Rhistory
+.RData
+bckp/
+www/
+data
+CSV.reader.R
+JSON.reader.R
