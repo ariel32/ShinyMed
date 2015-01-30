@@ -3,10 +3,9 @@ library(datasets)
 Logged = T;
 PASSWORD <- data.frame(Brukernavn = "capsula",
                        Passord = "fcb7a22d61fabc0b820fca872b5e7a5c")
+
+
 # Define server logic required to summarize and view the selected dataset
-
-data(cars)
-
 shinyServer(function(input, output) {
   source("www/login.R",  local = TRUE)
   
@@ -47,4 +46,5 @@ shinyServer(function(input, output) {
   output$plot1 <- renderPlot({ plot(cars, type=input$plotType, main = input$caption) })
   output$table <- renderDataTable({ cars }, options=list(pageLength=10))
   
+
 })
