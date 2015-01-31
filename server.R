@@ -1,5 +1,10 @@
 library(shiny)
 library(datasets)
+library("RSQLite")
+
+
+
+
 Logged = T;
 PASSWORD <- data.frame(Brukernavn = "capsula",
                        Passord = "fcb7a22d61fabc0b820fca872b5e7a5c")
