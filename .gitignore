@@ -4,6 +4,4 @@
 bckp/
 data
 www
-CSV.reader.R
-JSON.reader.R
-
+db.sqlite
