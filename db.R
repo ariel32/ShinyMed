@@ -33,16 +33,19 @@ for(x in dir("data")) {
     d.cs = d$pharmacy
     d.add = d$pharmacy_cnt
     dt <- dbReadTable(db, "chemshop")
-    if(length(which(dt$CSname == d.cs[y])) > 0) {
+    if(length(which(dt$CSname == d.cs[y])) == 0) {
       query = paste("INSERT INTO chemshop (CSname, address) VALUES ('", d.cs[y],"','", d.add[y], "')", sep = "")
       dbSendQuery(conn = db, query)
     }
+    print(i); i = i+1
   }
-  print(i)
-  i = i+1
 }
 
-
+for (x in dt$ID){
+  query = paste("UPDATE chemshop SET address ='",substr(dt$address[x],1, nchar(dt$address[x])-1),"' WHERE ID ='",x,"'"
+                ,sep = "")
+  dbSendQuery(conn = db, query)
+}
 
 
 

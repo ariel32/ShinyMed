@@ -2,12 +2,12 @@ library(shiny)
 library(datasets)
 library("RSQLite")
 
-
-
-
 Logged = T;
 PASSWORD <- data.frame(Brukernavn = "capsula",
                        Passord = "fcb7a22d61fabc0b820fca872b5e7a5c")
+
+db = dbConnect(SQLite(), dbname="db.sqlite")
+dbReadTable(db, "chemshop") -> dt
 
 # Define server logic required to summarize and view the selected dataset
 shinyServer(function(input, output) {
@@ -24,6 +24,8 @@ shinyServer(function(input, output) {
                             sidebarPanel(h3("Sidebar Panel")
                                          ,radioButtons("plotType", "Plot type", c("Scatter"="p", "Line"="l"))
                                          ,textInput("caption", "Caption:", "Название графика")
+                                         ,selectInput("csname", "Аптека:", dt$CSname)
+                                         ,textOutput("cs.address")
                             ),
                             mainPanel(h3("Main Panel")
                                       #, textOutput("text1")
@@ -50,6 +52,7 @@ shinyServer(function(input, output) {
   #output$text1 <- renderText({ input$caption })
   output$plot1 <- renderPlot({ plot(cars, type=input$plotType, main = input$caption) })
   output$table <- renderDataTable({ cars }, options=list(pageLength=10))
+  output$cs.address <- renderText({ dt$address[which(dt$CSname == input$csname)] })
   
 
 })
