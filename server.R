@@ -61,7 +61,12 @@ shinyServer(function(input, output) {
                             )
                    ),
                    ##### TAB3
-                   tabPanel("Component 3")
+                   tabPanel("Component 3"
+                            sidebarPanel(h3("Sidebar Panel")
+                            ),
+                            mainPanel(h3("Main Panel")
+                                      plotOutput("c3.plot")
+                            )
         )
       })
       ##### END GUI
