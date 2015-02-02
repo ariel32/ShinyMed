@@ -47,13 +47,13 @@ shinyServer(function(input, output) {
                    tabPanel("Аптеки",
                             sidebarPanel(h3("Sidebar Panel")
                                          ,selectInput("c2.medicine", "",
-                                                     c("Детралекс" = "detraleks",
-                                                       "Престанс 5/5" = "prestance55",
-                                                       "Престанс 5/10" = "prestance510",
-                                                       "Престанс 10/5" = "prestance105",
-                                                       "Престанс 10/10" = "prestance1010",
-                                                       "Кораксан 5" = "koraksan5",
-                                                       "Кораксан 7" = "koraksan7"))
+                                                      c("Детралекс" = "detraleks",
+                                                        "Престанс 5/5" = "prestance55",
+                                                        "Престанс 5/10" = "prestance510",
+                                                        "Престанс 10/5" = "prestance105",
+                                                        "Престанс 10/10" = "prestance1010",
+                                                        "Кораксан 5" = "koraksan5",
+                                                        "Кораксан 7" = "koraksan7"))
                                          ,textOutput("q2")
                             ),
                             mainPanel(h3("Main Panel")
@@ -61,19 +61,18 @@ shinyServer(function(input, output) {
                             )
                    ),
                    ##### TAB3
-                   tabPanel("Component 3"
-                            sidebarPanel(h3("Sidebar Panel")
-                            ),
+                   tabPanel("Component 3",
+                            sidebarPanel(h3("Sidebar Panel")),
                             mainPanel(h3("Main Panel")
-                                      plotOutput("c3.plot")
+                                      ,plotOutput("c3.plot"))
                             )
         )
       })
       ##### END GUI
     }
   })
-  ##### END OBSERVE
-  
+                          
+                  
   
   query = reactive({
     paste("SELECT time, quantity FROM data WHERE
@@ -90,7 +89,7 @@ shinyServer(function(input, output) {
     p <- p + stat_smooth(method = "loess", formula = y ~ x, size = 1)
     print(p)
   })
-
+  
   
   output$cs.address <- renderText({ dt$address[which(dt$CSname == input$csname)] })
   
@@ -115,10 +114,10 @@ shinyServer(function(input, output) {
     for(x in unique(a2$CSname)) {
       c2.cs = append(c2.cs, x)
       d = rbind(d, summary(a2$quantity[which(a2$CSname == x)]))
-   }
-      tt <- cbind(c2.cs,d)
-      names(tt) <- c("Аптека", "Мин", "1й кв", "Среднее", "Медиана", "3й кв", "Макс")
-      print(tt)
+    }
+    tt <- cbind(c2.cs,d)
+    names(tt) <- c("Аптека", "Мин", "1й кв", "Среднее", "Медиана", "3й кв", "Макс")
+    print(tt)
   }, options=list(pageLength=10))
   
   
